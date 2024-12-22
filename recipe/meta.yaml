@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/nr.preconditions-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/nr.preconditions-{{ version }}.tar.gz
   sha256: 86b91f9b9500f34b367780c26c60dc17c5f8f5784df38cbed7137b0ea6f3fa4d
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.5,<4.0
+    - python {{ python_min }}
   run:
-    - python >=3.5,<4.0
+    - python >={{ python_min }},<4.0
 
 test:
   imports:
@@ -30,6 +30,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://git.niklasrosenstein.com/NiklasRosenstein/nr
